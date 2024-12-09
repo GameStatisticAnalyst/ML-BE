@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/GameStatisticAnalyst/ML-BE/routes"
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	r := gin.Default()
+
+	routes.SetupRoutes(r)
+	log.Fatal(r.Run("0.0.0.0:8080"))
 }
