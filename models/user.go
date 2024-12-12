@@ -79,6 +79,14 @@ func emailValidation(email string) bool {
 	return re.MatchString(email)
 }
 
+func (u *User) ComparePassword(password string) (bool, error) {
+	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
 func emailExist(email string) (bool, error) {
 	db, err := db.NewDB()
 	if err != nil {
